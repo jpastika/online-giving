@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirector</title>
+    <meta charset='utf-8' />
+    <style>
+      body{
+        font:.9em Verdana, Arial, Helvetica, sans-serif;
+        color:#000;
+        line-height:1.3em;
+        padding:0;
+        margin:0;
+        background-color:#D9D9D9;
+      }
+
+      #container{
+        width:100%;
+      }
+      
+      #page{
+     
+        text-align:center;
+      }
+      
+      #title{
+        width:100%;
+        padding: 0 0 20px 0;
+      }
+      
+      #body{
+        width:100%;
+      }
+      
+      #search_container{
+        width:400px;
+        margin:0 auto;
+        padding:20px;
+      }
+      
+      #intro{
+        padding-bottom:10px;
+      }
+      
+      #search{
+        padding:10px;
+        background:#003366;
+        color:#fff;
+        box-shadow: 0 0px 5px #333;
+          -o-box-shadow: 0 0px 5px #333;
+          -webkit-box-shadow: 0 0px 5px #333;
+          -moz-box-shadow: 0 0px 5px #333;
+        text-shadow: #000 -1px -1px 1px;
+          -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        font-size:.9em;
+        vertical-align:top;
+      }
+      
+      #search form{
+        padding:10px 0;
+        margin:0;
+      }
+      
+      #search input{
+        font-size:16px;
+        width:120px;
+        margin:0 0 0 0;
+        vertical-align:middle;
+      }
+      #search button{
+        
+      }
+      
+      #search_label{
+        font:1.2em Verdana, Arial, Helvetica, sans-serif;
+        padding:10px 0; 
+      }
+      
+      #result{
+        margin-top:10px;
+        padding:10px;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        color:#000;
+        text-shadow: #ddd -1px -1px 1px;
+        font-size:14px;
+      }
+
+      #result ul{
+        list-style:none;        
+      }
+
+      #result li{
+        margin-bottom: 20px;
+      }
+      
+      #result.found{
+        background:#deeee2;
+      }
+      
+      #result.notfound{
+        background:#F4F5F5;
+      }
+      
+      #result.notfound ol{
+        
+      }
+      
+      #result a, #result a:hover, #result a:active, #result a:visited{
+        color:#fff;
+        background:#003366;
+        padding:5px 10px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-shadow:none;
+        text-decoration:none;
+        margin:10px;
+      }
+      
+      #result .callout{
+        color:#003366;
+      }
+      
+      #search_footer{
+        padding-top:10px;
+      }
+      
+      .hidden{
+        display:none;
+      }
+      
+      th{
+        background:#003366;
+        color:#fff;
+        font-size: .7em;
+        font-weight:normal;
+      }
+      
+      th.first{
+        -moz-border-radius-topleft: 5px;
+        -webkit-border-top-left-radius: 5px;
+        border-radius-topleft: 5px;
+        
+      }
+      
+      th.last{
+        -moz-border-radius-topright: 5px;
+        -webkit-border-top-right-radius: 5px;
+        border-radius-topright: 5px;
+        
+      }
+      
+      td{
+        font-size:.6em;
+      }
+      
+      tr{
+        background:#e5edf5;
+      }
+      
+      .alternate_row{
+        background:#fff;
+      }
+      
+      td a, td a:hover, td a:active, td a:visited{
+        color:#003366;
+        cursor:pointer;
+      }
+      
+      .col_sort{
+        cursor:pointer;
+      }
+      
+      .sorted{
+        font-style:italic;
+        font-weight:bold;
+      }
+      
+      tbody tr:hover{
+        background:#1d548c;
+      }
+      
+      tbody tr:hover a{
+        color:#fff;
+      }
+      
+      td div{
+        width:100%;
+      }
+      
+      .small{
+        font-size:10px;
+        font-weight:normal;
+      }
+      
+      .header_image img { width:90%; max-width:975px; padding:20px 0 0 0;}
+    </style>
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="page">
+        <div id="body">
+          <div id="title" class="header_image" align="center">
+            <img src="https://edenari.denarionline.com/Customer_Images/_WLFJ/WLFJ_GIVINGHEADER_975x150.jpg">
+          </div>
+          <div id="search_container">
+            <div id="intro"> Thank you for supporting <strong>His Radio</strong><br></div>
+            <div id="search">
+              <div id="search_label"> Please start by entering your zip&nbsp;code
+              </div>
+              <form id="search_form" _lpchecked="1">
+                <input type="text" id="search_input" name="search" size="10">&nbsp;<input type="submit" value="Continue" id="lookup_submit">
+              </form>
+            </div>
+            <div id="result"></div>
+            <div id="search_footer">
+              If you would like to give by phone please call<br><b>1-800-849-8930</b>
+            </div>
+            <br><br><br>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var API_KEY = 'AIzaSyCfcwbi1tPFJAuqRzTpBPCy_u2pgMys58c';
+      var SHEETID = '11O34o9kOjbrH-3p4idGqcs7qQm0eCVSF-Mrkz6DNKL0';
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+      var DENARI_URL = "https://www.denarionline.com/SAT_FT/di_survey.asp?COMP_REF=_#{DATABASE}&SURVEYCODE=DONOR&SATHON=YES&LOCAL=YES&VOL=YES";
+      
+      var stationFamily = 'HIS RADIO';
+      var station_data_store = 'hisradio_stationdata';
+      var zip_data_store = 'hisradio_zipdata';
+      var zip_data_loaded = false;
+      var station_data_loaded = false;
+      var zips_processed = false;
+      var stations_processed = false;
+      var zips = [];
+      var stations = [];
+      var redirect_url = 'https://edenari.denarionline.com/CustomPages/?page=';
+      
+      function getStationData() {
+        var params = {
+          spreadsheetId: SHEETID,
+          range: 'A2:T101'
+        };
+
+        var request = gapi.client.sheets.spreadsheets.values.get(params);
+        request.then(function(response) {
+          var range = response.result;
+          transformStationData(range);
+        }, function(reason) {
+          console.error('error: ' + reason.result.error.message);
+        });
+      }
+
+      function transformStationData(data){
+        var l_stations = new Array();
+        for (i = 0; i < data.values.length; i++) {
+          var row = data.values[i];
+          if (row[7] == stationFamily && row[15] == 'Yes')
+            l_stations.push([row[2], row[12], row[19]]);
+        }
+        stations = l_stations;
+
+        is_data_loaded();
+      }
+
+      function processStations(){
+        if (!stations_processed){
+          var d = new Array();
+          var l_stations = stations;
+          var stations_length = l_stations.length;
+          
+          for(var x = 0; x < stations_length; x++){
+            var item = new Array();
+            item.CallSign = trim11(l_stations[x][0]);
+            item.Station = trim11(l_stations[x][1]);
+            item.URL = trim11(l_stations[x][2]);
+            d.push(item);
+          }
+          stations = d;
+          if (stations.length) {
+            stations_processed = true;
+          }
+        }
+      }
+
+      function getZipData() {
+        var params = {
+          spreadsheetId: SHEETID,
+          range: 'ZipSignal'+ stationFamily +'!A2:I'
+        };
+
+        var request = gapi.client.sheets.spreadsheets.values.get(params);
+        request.then(function(response) {
+          var range = response.result;
+          transformZipData(range);
+        }, function(reason) {
+          console.error('error: ' + reason.result.error.message);
+        });
+      }
+
+      function transformZipData(data){
+        var l_zips = new Array();
+        for (i = 0; i < data.values.length; i++) {
+          var row = data.values[i];
+          l_zips.push([row[0], row[1], row[4], row[5], row[7], row[8]]);
+        }
+        zips = l_zips;
+
+        is_data_loaded();
+      }
+
+      function processZips(){
+        if (!zips_processed){
+          var x = new Array();
+          var l_zips = zips;
+          var zips_length = l_zips.length;
+          
+          for(var i = 0; i < zips_length; i++){
+            var item = new Array();
+            item.CallSign = trim11(l_zips[i][1]);
+            item.Zip = trim11(l_zips[i][2]);
+            item.Strength1 = trim11(l_zips[i][3]);
+            
+            x.push(item);
+            
+          }
+          zips = x;
+          if (zips.length) {
+            zips_processed = true;
+          }
+        }
+      }
+
+      function check_data(){
+        station_data_loaded = true;
+        zip_data_loaded = true;
+        
+        return station_data_loaded && zip_data_loaded;
+      }
+
+      function is_data_loaded(){
+        if (check_data()){
+          processZips();
+          processStations();
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+
+      function initClient() {
+        gapi.client.init({
+          'apiKey': API_KEY,
+          'scope': SCOPES,
+          'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        }).then(function() {
+          getStationData();
+          getZipData();
+        });
+      }
+
+      function handleClientLoad() {
+        gapi.load('client', initClient);
+      }
+    
+      function trim11 (str) {
+        if (str && str.length) {
+          str = str.replace(/^\s+/, '');
+          for (var i = str.length - 1; i >= 0; i--) {
+            if (/\S/.test(str.charAt(i))) {
+              str = str.substring(0, i + 1);
+              break;
+            }
+          }
+        }
+        return str;
+      }
+
+      function clearResult(){
+          $('#result').html('');
+      }
+
+      function doLookup() {
+          var x = $('#search_input').val();
+          var ret = new Array();
+
+          if (x == '' || x == null) {
+            alert("Please enter a zip code");
+          }
+          else {
+            ret = searchZip(x);
+            handleLookupResult(ret);
+          }
+      }
+
+      function searchZip(x) {
+        var ret = new Array();
+        var single = new Array();
+        var res = null;
+
+        var pos = findDataElementPosition2(zips, "Zip", x);
+        if (pos.length) {
+          var pos_length = pos.length;
+          for (var i = pos_length; i--; ) {
+            ret.push(zips[pos[i]]);
+          }
+        }
+
+        res = ret.length ? ret[0] : null;
+        for (var j = ret.length; j--; ) {
+          if (parseFloat(res.Strength1) < parseFloat(ret[j].Strength1)){
+            res = ret[j];
+          }
+        }
+        return res;
+      }
+
+
+      function handleLookupResult(res) {
+        var cnt = '';
+        if(!res){
+          cnt += "Do you listen online or using the His Radio App?<br>";
+          cnt += "<br>If yes, select one of the following:<br>";
+          cnt += "<br><a href='https://hisradio.com/giving/redirect/'>HisRadio.com</a><br>";
+          cnt += "<br><a href='https://hisradiowrtp.com/giving/redirect/'>HisRadioWRTP.com</a><br>";
+          cnt += "<br class=\"small\">(if incorrect, please reenter zip code and try again.)</b>";
+          
+          $('#result').removeClass('found');
+          $('#result').addClass('notfound');
+          $('#result').html(cnt);                 
+        }
+        else{
+          var pos2 = findDataElementPosition(stations, "CallSign", res.CallSign);
+          var url = redirect_url + stations[pos2].URL
+          
+          document.location.href = url;
+          return false;
+        }
+      }
+
+      function doReset(){
+        clearResult();
+        $('#search_input').val('');
+      }
+
+      function findDataElementPosition(data, field, value) {
+        var pos = -1;
+        var items = data;
+        if (items) {
+            if (items.length) {
+                var item_length = items.length;
+
+                for (var i = item_length; i--; ) {
+                    if (items[i][field] == value) {
+                        pos = i;
+                    }
+                }
+            }
+        }
+        return pos;
+      }
+
+      function findDataElementPosition2(data, field, value) {
+        var pos = new Array();
+        var items = data;
+        if (items) {
+            if (items.length) {
+                var item_length = items.length;
+
+                for (var i = item_length; i--; ) {
+                    if (items[i][field] == value) {
+                        pos.push(i);
+                    }
+                }
+            }
+        }
+        return pos;
+      }
+    </script>
+
+    <script language="JavaScript" type="text/javascript">
+        $(document).ready(function() {
+          doReset();
+        
+          $('#search_form').submit(function(e) {
+            e.preventDefault();
+            clearResult();
+            doLookup();
+            return false;
+          });
+
+          $("#lookup_submit").click(function() {
+            $('#search_form').submit();
+            return false;
+          });
+          
+          $('#search_input').focus();
+        });
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>
