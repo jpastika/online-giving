@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>His Radio - Online Giving</title>
+    <title>The JoyFM Online Giving</title>
     <meta charset='utf-8' />
     <style>
       body{
@@ -42,7 +42,7 @@
       
       #search{
         padding:10px;
-        background:#003366;
+        background:#ff0223;
         color:#fff;
         box-shadow: 0 0px 5px #333;
           -o-box-shadow: 0 0px 5px #333;
@@ -109,7 +109,7 @@
       
       #result a, #result a:hover, #result a:active, #result a:visited{
         color:#fff;
-        background:#003366;
+        background:#ff0223;
         padding:5px 10px;
         -moz-border-radius: 3px;
         -webkit-border-radius: 3px;
@@ -204,10 +204,10 @@
       <div id="page">
         <div id="body">
           <div id="title" class="header_image" align="center">
-            <img src="https://edenari.denarionline.com/Customer_Images/_WLFJ/WLFJ_GIVINGHEADER_975x150.jpg">
+            <img src="https://edenari.denarionline.com/Customer_Images/_WJIS/WJIS_GIVINGHEADER_975x150.jpg">
           </div>
           <div id="search_container">
-            <div id="intro"> Thank you for supporting <strong>His Radio</strong><br></div>
+            <div id="intro"> Thank you for supporting <strong>The Joy FM</strong><br></div>
             <div id="search">
               <div id="search_label"> Please start by entering your zip&nbsp;code
               </div>
@@ -217,7 +217,7 @@
             </div>
             <div id="result"></div>
             <div id="search_footer">
-              If you would like to give by phone please call<br><b>1-800-849-8930</b>
+              If you would like to give by phone please call<br><b>1-800-456-8910</b>
             </div>
             <br><br><br>
             </div>
@@ -231,9 +231,9 @@
       var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
       var DENARI_URL = "https://www.denarionline.com/SAT_FT/di_survey.asp?COMP_REF=_#{DATABASE}&SURVEYCODE=DONOR&SATHON=YES&LOCAL=YES&VOL=YES";
       
-      var stationFamily = 'HIS RADIO';
-      var station_data_store = 'hisradio_stationdata';
-      var zip_data_store = 'hisradio_zipdata';
+      var stationFamily = 'JOYFM';
+      var station_data_store = 'joyfm_stationdata';
+      var zip_data_store = 'joyfm_zipdata';
       var zip_data_loaded = false;
       var station_data_loaded = false;
       var zips_processed = false;
@@ -426,10 +426,11 @@
       function handleLookupResult(res) {
         var cnt = '';
         if(!res){
-          cnt += "Do you listen online or using the His Radio App?<br>";
+          cnt += "Do you listen online or using The Joy FM Radio App?<br>";
           cnt += "<br>If yes, select one of the following:<br>";
-          cnt += "<br><a href='https://hisradio.com/giving/redirect/'>HisRadio.com</a><br>";
-          cnt += "<br><a href='https://hisradiowrtp.com/giving/redirect/'>HisRadioWRTP.com</a><br>";
+          cnt += "<br><a href='http://florida.thejoyfm.com/giving/redirect/'>TheJoyFM.com - Florida</a><br>";
+          cnt += "<br><a href='http://georgia.thejoyfm.com/giving/redirect/'>TheJoyFM.com - Georgia</a><br>";
+          cnt += "<br><a href='http://alabama.thejoyfm.com/giving/redirect/'>TheJoyFM.com - Alabama</a><br>";
           cnt += "<br class=\"small\">(if incorrect, please reenter zip code and try again.)</b>";
           
           $('#result').removeClass('found');
