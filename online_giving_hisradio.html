@@ -10,7 +10,7 @@
         line-height:1.3em;
         padding:0;
         margin:0;
-        background-color:#D9D9D9;
+        background-color:#fff;
       }
 
       #container{
@@ -131,71 +131,153 @@
         display:none;
       }
       
-      th{
-        background:#003366;
-        color:#fff;
-        font-size: .7em;
-        font-weight:normal;
-      }
-      
-      th.first{
-        -moz-border-radius-topleft: 5px;
-        -webkit-border-top-left-radius: 5px;
-        border-radius-topleft: 5px;
-        
-      }
-      
-      th.last{
-        -moz-border-radius-topright: 5px;
-        -webkit-border-top-right-radius: 5px;
-        border-radius-topright: 5px;
-        
-      }
-      
-      td{
-        font-size:.6em;
-      }
-      
-      tr{
-        background:#e5edf5;
-      }
-      
-      .alternate_row{
-        background:#fff;
-      }
-      
-      td a, td a:hover, td a:active, td a:visited{
-        color:#003366;
-        cursor:pointer;
-      }
-      
-      .col_sort{
-        cursor:pointer;
-      }
-      
-      .sorted{
-        font-style:italic;
-        font-weight:bold;
-      }
-      
-      tbody tr:hover{
-        background:#1d548c;
-      }
-      
-      tbody tr:hover a{
-        color:#fff;
-      }
-      
-      td div{
-        width:100%;
-      }
-      
       .small{
         font-size:10px;
         font-weight:normal;
       }
       
       .header_image img { width:90%; max-width:975px; padding:20px 0 0 0;}
+
+      @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        body{
+          font:1.8em Verdana, Arial, Helvetica, sans-serif;
+          color:#000;
+          line-height:1.3em;
+          padding:0;
+          margin:0;
+          background-color:#fff;
+        }
+
+        #container{
+          width:100%;
+        }
+        
+        #page{
+          text-align:center;
+        }
+        
+        #title{
+          width:100%;
+          padding: 0 0 20px 0;
+        }
+        
+        #body{
+          width:100%;
+        }
+        
+        #search_container{
+          width:90%;
+          margin:0 auto;
+          padding:20px;
+        }
+        
+        #intro{
+          padding-bottom:10px;
+        }
+        
+        #search{
+          padding:10px;
+          background:#003366;
+          color:#fff;
+          box-shadow: 0 0px 5px #333;
+            -o-box-shadow: 0 0px 5px #333;
+            -webkit-box-shadow: 0 0px 5px #333;
+            -moz-box-shadow: 0 0px 5px #333;
+          text-shadow: #000 -1px -1px 1px;
+            -moz-border-radius: 6px;
+          -webkit-border-radius: 6px;
+          border-radius: 6px;
+          vertical-align:top;
+        }
+        
+        #search form{
+          padding:10px 0;
+          margin:0;
+        }
+        
+        #search input{
+          width:20%;
+          margin:0 0 0 0;
+          vertical-align:middle;
+          font-size: 1em;
+        }
+
+        .submit {
+          background: #F4F5F5;
+        }
+
+        #search button{
+          width:30%;
+        }
+        
+        #search_label{
+          font:1.2em Verdana, Arial, Helvetica, sans-serif;
+          padding:10px 0; 
+        }
+        
+        #result{
+          margin-top:10px;
+          padding:30px;
+          -moz-border-radius: 6px;
+          -webkit-border-radius: 6px;
+          border-radius: 6px;
+          color:#000;
+          text-shadow: #ddd -1px -1px 1px;
+          font-size: 0.4em;
+          line-height: 1em;
+        }
+
+        #result ul{
+          list-style:none;        
+        }
+
+        #result li{
+          margin-bottom: 20px;
+        }
+        
+        #result.found{
+          background:#deeee2;
+        }
+        
+        #result.notfound{
+          background:#F4F5F5;
+        }
+        
+        #result.notfound ol{
+          
+        }
+        
+        #result a, #result a:hover, #result a:active, #result a:visited{
+          color:#fff;
+          background:#003366;
+          padding:5px 10px;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          border-radius: 3px;
+          text-shadow:none;
+          text-decoration:none;
+          margin:10px;
+        }
+        
+        #result .callout{
+          color:#003366;
+        }
+        
+        #search_footer{
+          padding-top:10px;
+        }
+        
+        .hidden{
+          display:none;
+        }
+        
+        .small{
+          font-size:10px;
+          font-weight:normal;
+        }
+        
+        .header_image img { width:90%; max-width:975px; padding:20px 0 0 0;}
+      }
     </style>
     <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
@@ -212,7 +294,7 @@
               <div id="search_label"> Please start by entering your zip&nbsp;code
               </div>
               <form id="search_form" _lpchecked="1">
-                <input type="text" id="search_input" name="search" size="10">&nbsp;<input type="submit" value="Continue" id="lookup_submit">
+                <input type="text" id="search_input" name="search" size="10">&nbsp;<input class="submit" type="submit" value="Continue" id="lookup_submit">
               </form>
             </div>
             <div id="result"></div>
